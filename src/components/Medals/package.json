@@ -1,0 +1,5 @@
+{
+    "name": "Medals",
+    "private": true,
+    "main": "./Medals.jsx"
+}

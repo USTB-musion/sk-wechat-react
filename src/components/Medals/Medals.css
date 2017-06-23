@@ -1,0 +1,14 @@
+.medals .weui-grid__icon{
+    width:48px;
+    height:48px;
+}
+.medals .weui-grid__icon img{
+    width: auto;
+}
+.medals .weui-grid.checked::before{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.4) url(./Checked.png) no-repeat top right;
+    transform: none;
+}

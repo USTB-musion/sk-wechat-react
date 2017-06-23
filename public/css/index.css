@@ -1,0 +1,16 @@
+img{
+    max-width: 100%;
+}
+#root{
+    /*background-color: #EFEFF4*/
+}
+.weui-cell__hd{
+    color:#20a8d8;
+    margin-right: 10px;
+        width: 2.2em;
+    text-align: center;
+}
+
+.text-center{
+    text-align: center;
+}

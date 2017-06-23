@@ -1,0 +1,5 @@
+{
+    "name": "Child",
+    "private": true,
+    "main": "./Child.jsx"
+}
