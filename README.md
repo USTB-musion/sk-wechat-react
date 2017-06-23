@@ -8,7 +8,7 @@ DEMO截图如下
 
 ```
 # 提前依赖
-npm install create-react-app
+npm install -g create-react-app
 
 # 安装依赖
 npm install
