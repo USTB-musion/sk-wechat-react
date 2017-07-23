@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import {
     ActionSheet,
+    Article,
     Popup,
     PopupHeader,
+    Cells,
+    Cell,
+    CellHeader,
     CellsTitle,
     CellBody,
     CellFooter,
@@ -10,7 +14,8 @@ import {
     FormCell,
     Radio,
     TextArea,
-    SearchBar
+    SearchBar,
+    Button
 } from 'react-weui'
 
 import Children from '../components/Children'
@@ -26,9 +31,10 @@ class Teacher extends Component {
             child: null,
             //actions
             showAction: false,
+            isToggleDisplay: false,
             menus: [
                 {
-                    label: '定制评价标签',
+                    label: '为小朋友定制评价标签',
                     onClick: () => {
                         this.showMedalPopup()
                     }
@@ -41,28 +47,26 @@ class Teacher extends Component {
                 {
                     label: '评价该孩子',
                     onClick: () => {
-                        this.showParentsPopup()
+                        this.showChildPopup()
                     }
                 },
                 {
-                    label: '家长留言',
+                    label: '查看家长留言',
                     onClick: () => {
                         this.showParentsPopup()
                     }
-                },
+                }/*,
                 {
                     label: '养成表最新信息',
                     onClick: () => {
                         this.showParentsPopup()
                     }
-                }
+                }*/
             ],
             actions: [
                 {
                     label: '取消',
-                    onClick: this
-                        .hide
-                        .bind(this)
+                    onClick: this.hide.bind(this)
                 }
             ],
             //popup ask
@@ -70,15 +74,13 @@ class Teacher extends Component {
             //popup medal
             medal_show: false
         };
-        this.showAction = this
-            .showAction
-            .bind(this);
-        this.showAskPopup = this
-            .showAskPopup
-            .bind(this);
-        this.onChooseAsk = this
-            .onChooseAsk
-            .bind(this);
+        this.showAction = this.showAction.bind(this);
+        this.showAskPopup = this.showAskPopup.bind(this);
+        this.showChildPopup = this.showChildPopup.bind(this);
+        this.showParentsPopup = this.showParentsPopup.bind(this);
+        this.onChooseAsk = this.onChooseAsk.bind(this);
+        this.onChooseChild = this.onChooseChild.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.showMedalPopup = this.showMedalPopup.bind(this);
     }
 
@@ -93,9 +95,31 @@ class Teacher extends Component {
         this.setState({ask_show: true});
     }
 
+    //点击评价该孩子选框
+    showChildPopup() {
+        this.hide();
+        this.setState({child_show: true});
+    }
+
+    //点击查看家长留言选框
+    showParentsPopup() {
+        this.hide();
+        this.setState({parents_show: true});
+    }
+
     //选择具体的询问内容后触发
     onChooseAsk() {
         this.setState({ask_show: false})
+    }
+
+    //评价完孩子之后触发
+    onChooseChild() {
+        this.setState({child_show: false})
+    }
+
+    //处理完家长留言之后触发
+    onChooseParents() {
+        this.setState({parents_show: false})
     }
 
     //弹出选择称号弹框
@@ -117,6 +141,13 @@ class Teacher extends Component {
     handleChange(text, e) {
         let keywords = [text];
 
+    }
+
+    //点击家长留言回复显示回复框
+    handleClick() {
+        this.setState(preState => ({
+            isToggleDisplay: !preState.isToggleDisplay
+        }))
     }
 
     render() {
@@ -201,6 +232,64 @@ class Teacher extends Component {
                         <FormCell>
                             <CellBody>
                                 <TextArea placeholder="请输入询问家长内容" rows="3" maxlength="200"></TextArea>
+                            </CellBody>
+                        </FormCell>
+                    </Form>
+                </Popup>
+
+                <Popup
+                    show={this.state.child_show}
+                    onRequestClose={e => this.setState({child_show: false})}>
+                    <PopupHeader
+                        left="取消"
+                        right="确定"
+                        leftOnClick={e => this.setState({child_show: false})}
+                        rightOnClick={e => this.onChooseChild()}/>
+
+                    <CellsTitle>对【{this.state.child?this.state.child.name:"-"}】小朋友进行评价</CellsTitle>
+                    <Form>
+                        <FormCell>
+                            <CellBody>
+                                <TextArea placeholder="对不同时间段该小朋友的吃，喝，拉，睡，玩，衣进行简单评价" rows="6" maxlength="200"></TextArea>
+                            </CellBody>
+                        </FormCell>
+                    </Form>
+                </Popup>
+
+                <Popup
+                    show={this.state.parents_show}
+                    onRequestClose={e => this.setState({parents_show: false})}>
+                    <PopupHeader
+                        left="取消"
+                        right="确定"
+                        leftOnClick={e => this.setState({parents_show: false})}
+                        rightOnClick={e => this.onChooseParents()}/>
+
+                    <CellsTitle>【{this.state.child?this.state.child.name:"-"}】小朋友家长的留言</CellsTitle>
+                    <Form>
+                        <FormCell>
+                            <CellBody>
+                                <Article>
+                                            <p>谢谢老师的辛苦付出！</p>
+                                </Article>
+
+                            </CellBody>
+                            <CellFooter>
+                                <Button type="default" size="small" onClick={this.handleClick.bind(this)}>回复</Button>
+                            </CellFooter>
+                        </FormCell>
+                    </Form>
+
+
+
+                    <Form style={{display: this.state.isToggleDisplay ? 'block' : 'none'}}>
+                        <CellsTitle>回复【{this.state.child?this.state.child.name:"-"}】小朋友家长的留言：</CellsTitle>
+                        <FormCell>
+                            <CellBody>
+                                <TextArea placeholder="请输入回复内容" rows="3" maxlength="200"></TextArea>
+                                <CellFooter>
+                                    <Button type="primary" size="small" >评论</Button>
+                                </CellFooter>
                             </CellBody>
                         </FormCell>
                     </Form>

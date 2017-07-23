@@ -27,11 +27,11 @@ const pages = [
     path: '/kindergarten-leader',
     icon:'cutlery',
     title: '园长'
-    }/*, {
+    }, {
     path: '/parent',
     icon:'home',
     title: '家长'
-  }*/
+  }
 ];
 
 const MyLink = (props)=>{
