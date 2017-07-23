@@ -19,18 +19,19 @@ const pages = [
     icon:'graduation-cap',
     title: '主班老师'
   }, {
-    path: '/teacher-living',
-    icon:'cutlery',
-    title: '生活老师'
-  }, {
     path: '/doctor',
     icon:'user-md',
     title: '保健医生'
-  }, {
+  },
+    {
+    path: '/kindergarten-leader',
+    icon:'cutlery',
+    title: '园长'
+    }/*, {
     path: '/parent',
     icon:'home',
     title: '家长'
-  }
+  }*/
 ];
 
 const MyLink = (props)=>{

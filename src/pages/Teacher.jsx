@@ -28,7 +28,7 @@ class Teacher extends Component {
             showAction: false,
             menus: [
                 {
-                    label: '称号标注',
+                    label: '定制评价标签',
                     onClick: () => {
                         this.showMedalPopup()
                     }
@@ -36,6 +36,24 @@ class Teacher extends Component {
                     label: '一键询问',
                     onClick: () => {
                         this.showAskPopup()
+                    }
+                },
+                {
+                    label: '评价该孩子',
+                    onClick: () => {
+                        this.showParentsPopup()
+                    }
+                },
+                {
+                    label: '家长留言',
+                    onClick: () => {
+                        this.showParentsPopup()
+                    }
+                },
+                {
+                    label: '养成表最新信息',
+                    onClick: () => {
+                        this.showParentsPopup()
                     }
                 }
             ],

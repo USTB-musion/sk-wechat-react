@@ -7,7 +7,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import Teacher from './pages/Teacher'
-import TeacherLiving from './pages/TeacherLiving'
+import TeacherLiving from './pages/KinderGartenLeader'
 import Doctor from './pages/Doctor'
 import Parent from './pages/Parent'
 
@@ -22,8 +22,8 @@ ReactDOM.render(
         <div >
             <Route exact path="/" component={App}/>
             <Route path="/teacher" component={Teacher}/>
-            <Route path="/teacher-living" component={TeacherLiving}/>
             <Route path="/doctor" component={Doctor}/>
+            <Route path="/kindergarten-leader" component={TeacherLiving}/>
             <Route path="/parent" component={Parent}/>
            
         </div>
